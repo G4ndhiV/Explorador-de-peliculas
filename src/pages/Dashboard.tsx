@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { getFavorites, removeFavorite } from "../config/firebase";
+import { useEffect, useState } from "react";
+import { getFavorites, removeFavorite } from "../config/firebase"
 
 // ✅ Definir el tipo `Movie` directamente aquí (ya que no tienes una carpeta `types/`)
 interface Movie {

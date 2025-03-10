@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
 import { auth, getFavorites, saveFavorite, removeFavorite } from "../config/firebase.tsx";
-import { Movie } from '../pages/Home.tsx';
+import { Movie } from "../types/Movie"; // ✅ Importa Movie correctamente
+
 
 export interface ContextProps {
     favorites: Map<number, Movie>;
