@@ -1,55 +1,26 @@
-<<<<<<< HEAD
-# movie-explorer
-movie-explorer
-=======
-# React + TypeScript + Vite
+# 🎬 Movie Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Movie Explorer** es una aplicación web construida con React, TypeScript y Vite que permite explorar, buscar y visualizar información de películas. Está diseñada para ser rápida, interactiva y fácil de expandir, ideal para cinéfilos y desarrolladores que quieran practicar consumo de APIs de películas.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Objetivos
 
-## Expanding the ESLint configuration
+✅ Construir una aplicación React moderna usando Vite como entorno de desarrollo.  
+✅ Integrar una API de películas (por ejemplo, OMDb API o The Movie Database) para obtener datos dinámicos.  
+✅ Permitir búsquedas de películas por título, género o año.  
+✅ Mostrar detalles de cada película, incluyendo póster, sinopsis, calificación y reparto.  
+✅ Aplicar buenas prácticas de desarrollo con TypeScript, ESLint y componentes reutilizables.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## 🔧 Tecnologías usadas
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **React**  
+- **TypeScript**  
+- **Vite** (bundler rápido y ligero)  
+- **ESLint** (para buenas prácticas y estilo de código)  
+- **APIs de películas** (OMDb API, The Movie Database u otras)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
->>>>>>> e10aff2 (Initial commit)
