@@ -1,58 +1,79 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, type FirebaseOptions } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc, getDocs, deleteDoc, query, where } from "firebase/firestore";
-import { Movie } from "../types/Movie"; // ✅ Importa Movie correctamente
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  getDocs,
+  deleteDoc,
+  query,
+  where,
+} from "firebase/firestore";
+import { Movie } from "../types/Movie";
 
-// ✅ Configuración de Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyB9of4pBCICDHQeaRmEs3AdEUeKB6DISmA",
-    authDomain: "movie-explorer-29aae.firebaseapp.com",
-    projectId: "movie-explorer-29aae",
-    storageBucket: "movie-explorer-29aae.firebasestorage.app",
-    messagingSenderId: "126800380553",
-    appId: "1:126800380553:web:b8af78a97c422758d9bc58",
+const firebaseConfig: FirebaseOptions = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-// ✅ Inicializar Firebase
+if (import.meta.env.PROD) {
+  const required: (keyof FirebaseOptions)[] = [
+    "apiKey",
+    "authDomain",
+    "projectId",
+    "appId",
+  ];
+  const missing = required.filter((k) => !firebaseConfig[k]);
+  if (missing.length) {
+    console.error(
+      "[CineScope] Faltan variables VITE_FIREBASE_* en el entorno de producción:",
+      missing.join(", ")
+    );
+  }
+}
+
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-// ✅ Guardar una película como favorita
 export const saveFavorite = async (movie: Movie): Promise<void> => {
-    const user = auth.currentUser;
-    if (!user) return;
-    try {
-        const favRef = doc(db, "favorites", `${user.uid}_${movie.id}`);
-        await setDoc(favRef, { userId: user.uid, ...movie });
-        console.log("🔥 Favorito guardado:", movie.title);
-    } catch (error) {
-        console.error("❌ Error al guardar favorito:", error);
+  const user = auth.currentUser;
+  if (!user) return;
+  try {
+    const favRef = doc(db, "favorites", `${user.uid}_${movie.id}`);
+    await setDoc(favRef, { userId: user.uid, ...movie });
+    if (import.meta.env.DEV) {
+      console.log("Favorito guardado:", movie.title);
     }
+  } catch (error) {
+    console.error("Error al guardar favorito:", error);
+  }
 };
 
-// ✅ Obtener películas favoritas del usuario autenticado
 export const getFavorites = async (): Promise<Movie[]> => {
-    const user = auth.currentUser;
-    if (!user) return [];
-    try {
-        const q = query(collection(db, "favorites"), where("userId", "==", user.uid));
-        const querySnapshot = await getDocs(q);
-        return querySnapshot.docs.map((doc) => doc.data() as Movie); // ✅ Tipar correctamente el retorno
-    } catch (error) {
-        console.error("❌ Error al obtener favoritos:", error);
-        return [];
-    }
+  const user = auth.currentUser;
+  if (!user) return [];
+  try {
+    const q = query(collection(db, "favorites"), where("userId", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((d) => d.data() as Movie);
+  } catch (error) {
+    console.error("Error al obtener favoritos:", error);
+    return [];
+  }
 };
 
-// ✅ Eliminar una película de favoritos
 export const removeFavorite = async (movieId: number): Promise<void> => {
-    const user = auth.currentUser;
-    if (!user) return;
-    try {
-        await deleteDoc(doc(db, "favorites", `${user.uid}_${movieId}`));
-        console.log("🗑️ Favorito eliminado:", movieId);
-    } catch (error) {
-        console.error("❌ Error al eliminar favorito:", error);
-    }
+  const user = auth.currentUser;
+  if (!user) return;
+  try {
+    await deleteDoc(doc(db, "favorites", `${user.uid}_${movieId}`));
+  } catch (error) {
+    console.error("Error al eliminar favorito:", error);
+  }
 };

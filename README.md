@@ -24,3 +24,20 @@
 
 ---
 
+## Configuración y seguridad
+
+Las claves de **TMDB** y **Firebase** no deben estar en el código. Copia `.env.example` a `.env` y rellena los valores:
+
+```bash
+cp .env.example .env
+```
+
+- **TMDB**: [API Settings](https://www.themoviedb.org/settings/api)
+- **Firebase**: consola del proyecto → Configuración → Tus apps (SDK web)
+
+En **Vercel** (u otro host), define las mismas variables `VITE_*` en *Environment Variables* para producción.
+
+> Las claves de Firebase en el cliente son públicas por diseño; la protección real viene de **reglas de Firestore** y **dominios autorizados** en la consola de Firebase. Si alguna clave llegó a subirse al historial de git, conviene **rotarla** en la consola.
+
+---
+
