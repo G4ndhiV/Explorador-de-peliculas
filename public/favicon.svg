@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="CineScope">
+  <defs>
+    <linearGradient id="a" x1="4" y1="6" x2="28" y2="26" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#ea580c"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="#07070c"/>
+  <!-- Claqueta / cine -->
+  <path fill="url(#a)" d="M7 10h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2Z"/>
+  <path fill="#07070c" d="M7 10h18v6H7v-6Z" opacity=".92"/>
+  <path stroke="#fbbf24" stroke-width="1.2" stroke-linecap="round" d="M9 13h6M9 15.5h4" opacity=".9"/>
+  <path fill="url(#a)" d="M7 16h18v2H7v-2Z"/>
+  <path fill="#07070c" d="M9 18h14v4H9v-4Z" opacity=".92"/>
+  <path fill="url(#a)" d="M11 20h2v1h-2v-1Zm4 0h2v1h-2v-1Zm4 0h2v1h-2v-1Z" opacity=".85"/>
+</svg>
